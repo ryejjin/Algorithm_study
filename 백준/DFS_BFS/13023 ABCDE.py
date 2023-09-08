@@ -1,33 +1,31 @@
-import sys
-input = sys.stdin.readline
-sys.setrecursionlimit(100000)
-
-def dfs(x, cnt):
-    global flag
-    if cnt == 5 or flag == 1:
-        flag = 1
-        return
-    visit[x] = True
-    for i in graph[x]:
-        if not visit[i]:
-            dfs(x, cnt+1)
-    visit[x] = False
-
 n, m = map(int, input().split())
-graph = [[] for _ in range(n+1)]
-visit = [False] * (n+1)
-flag = 0
-for _ in range(m):
+adj_lst = [[] for i in range(n)]
+
+for i in range(m):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    adj_lst[a].append(b)
+    adj_lst[b].append(a)
 
+visited = [False for i in range(n)]
+
+def dfs(v, depth):
+    global ans
+    visited[v] = True
+    if depth == 4:
+        ans = True
+        return
+    for nxt in adj_lst[v]:
+        if not visited[nxt]:
+            dfs(nxt, depth+1)
+            visited[nxt] = False
+
+ans = False
 for i in range(n):
-    dfs(i, 1)
-    if flag:
+    dfs(i,0)
+    visited[i] = False
+    if ans:
         break
-
-if flag:
+if ans:
     print(1)
 else:
     print(0)
