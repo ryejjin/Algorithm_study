@@ -51,8 +51,8 @@ cookie_body = [0]*5
 
 for i in range(n):
     for j in range(n):
-        if body[i][j] != 0:
+        if body[i][j] != 0 or body[i][j] != 8 or body[i][j] != 9:
             cookie_body[body[i][j]-1] += 1
 
 print(hi, hj, end = ' ')
-print(*cookie_body)
+print(cookie_body)
