@@ -8,7 +8,7 @@ for i in range(n):
         if cookie[i][j] == '*':
             if cookie[i-1][j] == '*' and cookie[i+1][j] == '*' and cookie[i][j-1]=='*' and cookie[i][j+1]=='*':
                 body[i][j] = 9  # 심장
-                hi, hj = i, j
+                hi, hj = i+1, j+1
 
 for i in range(n):
     for j in range(n):
@@ -35,13 +35,13 @@ for i in range(n):
                     body[i][nj] = 2
                     nj += 1
             # 왼다리
-            elif body[i-1][j+1] == 2:
+            elif body[i-1][j+1] == 3:
                 ni = i
                 while cookie[ni][j] == '*':
                     body[ni][j] = 4
                     ni += 1
             # 오른다리
-            elif body[i-1][j-1] == 2:
+            elif body[i-1][j-1] == 3:
                 ni = i
                 while cookie[ni][j] == '*':
                     body[ni][j] = 5
@@ -51,8 +51,10 @@ cookie_body = [0]*5
 
 for i in range(n):
     for j in range(n):
-        if body[i][j] != 0 or body[i][j] != 8 or body[i][j] != 9:
-            cookie_body[body[i][j]-1] += 1
+        if body[i][j] != 0:
+            if body[i][j] != 8 and body[i][j] !=9:
+                cookie_body[body[i][j]-1] += 1
 
 print(hi, hj, end = ' ')
-print(cookie_body)
+print()
+print(*cookie_body)
