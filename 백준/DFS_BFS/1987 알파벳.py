@@ -1,6 +1,3 @@
-import sys
-input = sys.stdin.readline
-
 r, c = map(int, input().split())
 arr = [list(input()) for _ in range(r)]
 
